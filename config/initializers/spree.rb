@@ -81,7 +81,7 @@ Spree::Api::Config.configure do |config|
   config.requires_authentication = true
 end
 
-Spree.user_class = "Spree::LegacyUser"
+Spree.user_class = "Vendor"
 
 # Rules for avoiding to store the current path into session for redirects
 # When at least one rule is matched, the request path will not be stored
@@ -90,3 +90,6 @@ Spree.user_class = "Spree::LegacyUser"
 # the class name:
 #
 # Spree::UserLastUrlStorer.rules << 'Spree::UserLastUrlStorer::Rules::AuthenticationRule'
+Rails.application.config.to_prepare do
+  require_dependency 'spree/authentication_helpers'
+end
